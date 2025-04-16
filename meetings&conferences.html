@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Hotel | Meetings & Conferences</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #c19a6b;
+      --primary-dark: #8a6d3b;
+      --dark-color: #222;
+      --light-color: #f9f9f9;
+      --gray-color: #777;
+      --light-gray: #eaeaea;
+      --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: #fff;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    ul {
+      list-style: none;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary-color);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title p {
+      color: var(--gray-color);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      z-index: 1000;
+      transition: var(--transition);
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    header.scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow);
+      padding: 15px 0;
+    }
+    
+    header.scrolled .logo {
+      color: var(--dark-color);
+    }
+    
+    header.scrolled .logo span {
+      color: var(--primary-color);
+    }
+    
+    header.scrolled nav ul li a {
+      color: var(--dark-color);
+    }
+    
+    header.scrolled .mobile-menu-btn i {
+      color: var(--dark-color);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo i {
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .logo span {
+      color: var(--primary-color);
+    }
+    
+    nav ul {
+      display: flex;
+      align-items: center;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+      position: relative;
+    }
+    
+    nav ul li a {
+      font-weight: 500;
+      transition: var(--transition);
+      color: white;
+    }
+    
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+    
+    nav ul li a.active {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
+    
+    /* Page Hero */
+    .page-hero {
+      height: 60vh;
+      min-height: 500px;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      margin-top: 80px;
+    }
+    
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, #fff, transparent);
+      z-index: 1;
+    }
+    
+    .page-hero-content {
+      width: 100%;
+      padding: 0 20px;
+      z-index: 2;
+    }
+    
+    .page-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .page-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+    
+    /* Meeting Spaces Section */
+    .meeting-spaces {
+      padding: 100px 0;
+      background-color: #fff;
+    }
+    
+    .spaces-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+    
+    .space-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .space-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .space-img {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .space-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .space-card:hover .space-img img {
+      transform: scale(1.05);
+    }
+    
+    .space-content {
+      padding: 25px;
+    }
+    
+    .space-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--dark-color);
+    }
+    
+    .space-capacity {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+    
+    .space-capacity i {
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .space-features ul {
+      margin-bottom: 20px;
+    }
+    
+    .space-features li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 10px;
+      color: var(--gray-color);
+    }
+    
+    .space-features li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+    }
+    
+    .space-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--light-gray);
+    }
+    
+    .price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    .price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--gray-color);
+    }
+    
+    /* Amenities Section */
+    .amenities {
+      padding: 80px 0;
+      background-color: var(--light-gray);
+    }
+    
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .amenity-card {
+      text-align: center;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .amenity-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .amenity-icon {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(193, 154, 107, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+    }
+    
+    .amenity-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    .amenity-card p {
+      color: var(--gray-color);
+      font-size: 0.95rem;
+    }
+    
+    /* Testimonials Section */
+    .testimonials {
+      padding: 100px 0;
+      background-color: #fff;
+    }
+    
+    .testimonial-slider {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .testimonial {
+      display: none;
+      text-align: center;
+      padding: 30px;
+    }
+    
+    .testimonial.active {
+      display: block;
+      animation: fadeIn 1s ease;
+    }
+    
+    .testimonial-text {
+      background-color: var(--light-gray);
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .testimonial-text::before {
+      content: '\201C';
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      color: var(--primary-color);
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      opacity: 0.3;
+    }
+    
+    .testimonial-text p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--dark-color);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .author-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 20px;
+      border: 3px solid var(--primary-color);
+    }
+    
+    .author-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      margin-bottom: 5px;
+      text-align: left;
+    }
+    
+    .author-info p {
+      color: var(--gray-color);
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .slider-dot.active {
+      background-color: var(--primary-color);
+      transform: scale(1.2);
+    }
+    
+    /* CTA Section */
+    .cta {
+      padding: 80px 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+    }
+    
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .cta p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+    }
+    
+    /* Contact Form Section */
+    .contact-form {
+      padding: 100px 0;
+      background-color: #fff;
+    }
+    
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(193, 154, 107, 0.2);
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+      bottom: 0;
+      left: 0;
+    }
+    
+    .footer-column p {
+      margin-bottom: 20px;
+      color: #aaa;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+    
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links ul li a {
+      color: #aaa;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    
+    .footer-links ul li a:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+    
+    .contact-info li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      color: #aaa;
+    }
+    
+    .contact-info i {
+      margin-right: 15px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    .footer-bottom a {
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+    
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background-color: white;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
+      border-radius: 10px;
+      position: relative;
+      transform: translateY(-50px);
+      transition: var(--transition);
+    }
+    
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .modal-content h3 {
+      margin: 25px 0 15px;
+      color: var(--dark-color);
+    }
+    
+    .modal-content p {
+      margin-bottom: 15px;
+    }
+    
+    .modal-content ul {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    
+    .modal-content ul li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .modal-content ul li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray-color);
+      transition: var(--transition);
+    }
+    
+    .close-btn:hover {
+      color: var(--dark-color);
+      transform: rotate(90deg);
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .page-hero h1 {
+        font-size: 3rem;
+      }
+      
+      .spaces-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        z-index: 999;
+      }
+      
+      nav ul.active {
+        left: 0;
+      }
+      
+      nav ul li {
+        margin: 15px 0;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .page-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .amenities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      
+      .form-container {
+        padding: 30px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .page-hero {
+        height: 50vh;
+        min-height: 400px;
+      }
+      
+      .page-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .page-hero p {
+        font-size: 1rem;
+      }
+      
+      .btn {
+        padding: 10px 25px;
+      }
+      
+      .space-content {
+        padding: 20px;
+      }
+      
+      .spaces-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonial-author {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .author-img {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+      
+      .author-info h4,
+      .author-info p {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-hotel"></i>Dream <span>Hotel</span>
+      </a>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="accommodation.html">Accommodations</a></li>
+          <li><a href="meetings.html" class="active">Meetings</a></li>
+          <li><a href="dining.html">Dining</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <h1>Meetings & Conferences</h1>
+      <p>Host your next event in our sophisticated meeting spaces equipped with state-of-the-art technology and exceptional service.</p>
+      <a href="#contact" class="btn btn-primary">Request Information</a>
+    </div>
+  </section>
+
+  <!-- Meeting Spaces Section -->
+  <section class="meeting-spaces">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Meeting Spaces</h2>
+        <p>From board meetings to large conferences, we have the perfect space for your event. All our meeting rooms feature natural light, ergonomic seating, and cutting-edge technology.</p>
+      </div>
+      
+      <div class="spaces-grid">
+        <!-- Space 1 -->
+        <div class="space-card">
+          <div class="space-img">
+            <img src="https://images.unsplash.com/photo-1568219656418-15c329312bf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Grand Ballroom">
+          </div>
+          <div class="space-content">
+            <h3>Grand Ballroom</h3>
+            <div class="space-capacity">
+              <i class="fas fa-users"></i>
+              <span>Up to 500 guests</span>
+            </div>
+            <div class="space-features">
+              <ul>
+                <li>Divisible into 3 sections</li>
+                <li>Built-in stage</li>
+                <li>Dance floor</li>
+                <li>HD projectors</li>
+              </ul>
+            </div>
+            <div class="space-price">
+              <div class="price">$2,500<span> / day</span></div>
+              <a href="#" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Space 2 -->
+        <div class="space-card">
+          <div class="space-img">
+            <img src="https://images.unsplash.com/photo-1573152958734-1922c188fba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Executive Boardroom">
+          </div>
+          <div class="space-content">
+            <h3>Executive Boardroom</h3>
+            <div class="space-capacity">
+              <i class="fas fa-users"></i>
+              <span>Up to 24 guests</span>
+            </div>
+            <div class="space-features">
+              <ul>
+                <li>Mahogany conference table</li>
+                <li>Video conferencing</li>
+                <li>Executive chairs</li>
+                <li>Private lounge</li>
+              </ul>
+            </div>
+            <div class="space-price">
+              <div class="price">$800<span> / day</span></div>
+              <a href="#" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Space 3 -->
+        <div class="space-card">
+          <div class="space-img">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Horizon Conference Center">
+          </div>
+          <div class="space-content">
+            <h3>Horizon Conference Center</h3>
+            <div class="space-capacity">
+              <i class="fas fa-users"></i>
+              <span>Up to 200 guests</span>
+            </div>
+            <div class="space-features">
+              <ul>
+                <li>Divisible into 4 sections</li>
+                <li>Built-in sound system</li>
+                <li>Multiple screens</li>
+                <li>Registration area</li>
+              </ul>
+            </div>
+            <div class="space-price">
+              <div class="price">$1,500<span> / day</span></div>
+              <a href="#" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Space 4 -->
+        <div class="space-card">
+          <div class="space-img">
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Sunrise Meeting Room">
+          </div>
+          <div class="space-content">
+            <h3>Sunrise Meeting Room</h3>
+            <div class="space-capacity">
+              <i class="fas fa-users"></i>
+              <span>Up to 50 guests</span>
+            </div>
+            <div class="space-features">
+              <ul>
+                <li>U-shape setup</li>
+                <li>Natural light</li>
+                <li>Whiteboards</li>
+                <li>Catering available</li>
+              </ul>
+            </div>
+            <div class="space-price">
+              <div class="price">$600<span> / day</span></div>
+              <a href="#" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Space 5 -->
+        <div class="space-card">
+          <div class="space-img">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Innovation Lab">
+          </div>
+          <div class="space-content">
+            <h3>Innovation Lab</h3>
+            <div class="space-capacity">
+              <i class="fas fa-users"></i>
+              <span>Up to 40 guests</span>
+            </div>
+            <div class="space-features">
+              <ul>
+                <li>Interactive whiteboards</li>
+                <li>Flexible seating</li>
+                <li>Brainstorming tools</li>
+                <li>High-speed WiFi</li>
+              </ul>
+            </div>
+            <div class="space-price">
+              <div class="price">$750<span> / day</span></div>
+              <a href="#" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Space 6 -->
+        <div class="space-card">
+          <div class="space-img">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Terrace Meeting Room">
+          </div>
+          <div class="space-content">
+            <h3>Terrace Meeting Room</h3>
+            <div class="space-capacity">
+              <i class="fas fa-users"></i>
+              <span>Up to 30 guests</span>
+            </div>
+            <div class="space-features">
+              <ul>
+                <li>Outdoor terrace access</li>
+                <li>Natural light</li>
+                <li>Casual atmosphere</li>
+                <li>Garden views</li>
+              </ul>
+            </div>
+            <div class="space-price">
+              <div class="price">$550<span> / day</span></div>
+              <a href="#" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Amenities Section -->
+  <section class="amenities">
+    <div class="container">
+      <div class="section-title">
+        <h2>Meeting Amenities</h2>
+        <p>We provide everything you need for a successful event, from high-tech equipment to gourmet catering options.</p>
+      </div>
+      
+      <div class="amenities-grid">
+        <!-- Amenity 1 -->
+        <div class="amenity-card">
+          <div class="amenity-icon">
+            <i class="fas fa-wifi"></i>
+          </div>
+          <h3>High-Speed WiFi</h3>
+          <p>Complimentary high-speed internet access throughout all meeting spaces with dedicated bandwidth for events.</p>
+        </div>
+        
+        <!-- Amenity 2 -->
+        <div class="amenity-card">
+          <div class="amenity-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3>Catering Services</h3>
+          <p>Customizable menus from our award-winning culinary team, from coffee breaks to gala dinners.</p>
+        </div>
+        
+        <!-- Amenity 3 -->
+        <div class="amenity-card">
+          <div class="amenity-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h3>AV Equipment</h3>
+          <p>State-of-the-art audio visual equipment including projectors, screens, microphones and video conferencing.</p>
+        </div>
+        
+        <!-- Amenity 4 -->
+        <div class="amenity-card">
+          <div class="amenity-icon">
+            <i class="fas fa-concierge-bell"></i>
+          </div>
+          <h3>Dedicated Staff</h3>
+          <p>Professional event coordinators and technical staff to ensure your meeting runs smoothly.</p>
+        </div>
+        
+        <!-- Amenity 5 -->
+        <div class="amenity-card">
+          <div class="amenity-icon">
+            <i class="fas fa-parking"></i>
+          </div>
+          <h3>Complimentary Parking</h3>
+          <p>Ample parking space for all your attendees with valet service available.</p>
+        </div>
+        
+        <!-- Amenity 6 -->
+        <div class="amenity-card">
+          <div class="amenity-icon">
+            <i class="fas fa-business-time"></i>
+          </div>
+          <h3>Business Center</h3>
+          <p>24/7 access to computers, printers, copiers and secretarial services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>What Our Clients Say</h2>
+        <p>Don't just take our word for it. Here's what some of our recent clients had to say about their experience.</p>
+      </div>
+      
+      <div class="testimonial-slider">
+        <!-- Testimonial 1 -->
+        <div class="testimonial active">
+          <div class="testimonial-text">
+            <p>The Dream Hotel exceeded all our expectations for our annual conference. The staff was attentive, the facilities were top-notch, and our attendees were blown away by the service. We'll definitely be back next year!</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-img">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+            </div>
+            <div class="author-info">
+              <h4>Sarah Johnson</h4>
+              <p>CEO, TechForward Inc.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="testimonial">
+          <div class="testimonial-text">
+            <p>Our board retreat at the Executive Boardroom was flawless. The space was elegant yet comfortable, the technology worked perfectly, and the catering was exceptional. The team accommodated all our last-minute requests with a smile.</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-img">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+            </div>
+            <div class="author-info">
+              <h4>Michael Chen</h4>
+              <p>Chairman, Global Financial Group</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="testimonial">
+          <div class="testimonial-text">
+            <p>We hosted our product launch in the Grand Ballroom and it was absolutely spectacular. The event team helped us with everything from staging to lighting to catering. Our guests are still talking about what a wonderful evening it was.</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-img">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lisa Rodriguez">
+            </div>
+            <div class="author-info">
+              <h4>Lisa Rodriguez</h4>
+              <p>Marketing Director, Luxe Cosmetics</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slider-controls">
+        <div class="slider-dot active" data-index="0"></div>
+        <div class="slider-dot" data-index="1"></div>
+        <div class="slider-dot" data-index="2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Plan Your Event?</h2>
+      <p>Our dedicated events team is ready to help you create a memorable meeting or conference. Contact us today to discuss your requirements and we'll tailor a package just for you.</p>
+      <a href="#contact" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Request Information</h2>
+        <p>Complete the form below and our events team will contact you within 24 hours to discuss your meeting or conference requirements.</p>
+      </div>
+      
+      <div class="form-container">
+        <form id="meeting-inquiry-form">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="event-type">Event Type</label>
+            <select id="event-type" class="form-control" required>
+              <option value="">Select Event Type</option>
+              <option value="conference">Conference</option>
+              <option value="meeting">Business Meeting</option>
+              <option value="seminar">Seminar/Workshop</option>
+              <option value="gala">Gala Dinner</option>
+              <option value="wedding">Wedding</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="attendees">Number of Attendees</label>
+            <input type="number" id="attendees" class="form-control" min="1" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="date">Preferred Date(s)</label>
+            <input type="text" id="date" class="form-control" placeholder="MM/DD/YYYY or range" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Additional Information</label>
+            <textarea id="message" class="form-control" rows="5"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary submit-btn">Submit Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Dream Hotel</h3>
+          <p>Luxury accommodations, exceptional dining, and world-class meeting facilities in the heart of the city.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="accommodation.html">Accommodations</a></li>
+              <li><a href="meetings.html">Meetings & Events</a></li>
+              <li><a href="dining.html">Dining</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Meeting Services</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#">Conference Planning</a></li>
+              <li><a href="#">Catering Menus</a></li>
+              <li><a href="#">AV Equipment</a></li>
+              <li><a href="#">Floor Plans</a></li>
+              <li><a href="#">Testimonials</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>123 Luxury Avenue, Downtown, City 10001</span>
+            </li>
+            <li>
+              <i class="fas fa-phone-alt"></i>
+              <span>+1 (555) 123-4567</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>events@dreamhotel.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Dream Hotel. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
+    // Testimonial Slider
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.slider-dot');
+    let currentTestimonial = 0;
+    
+    function showTestimonial(index) {
+      testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      testimonials[index].classList.add('active');
+      dots[index].classList.add('active');
+      currentTestimonial = index;
+    }
+    
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        showTestimonial(parseInt(this.getAttribute('data-index')));
+      });
+    });
+    
+    // Auto-rotate testimonials
+    setInterval(() => {
+      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+      showTestimonial(currentTestimonial);
+    }, 5000);
+    
+    // Form Submission
+    const inquiryForm = document.getElementById('meeting-inquiry-form');
+    
+    inquiryForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const formData = {
+        name: document.getElementById('name').value,
+        company: document.getElementById('company').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        eventType: document.getElementById('event-type').value,
+        attendees: document.getElementById('attendees').value,
+        date: document.getElementById('date').value,
+        message: document.getElementById('message').value
+      };
+      
+      // Here you would typically send the data to your server
+      console.log('Form submitted:', formData);
+      
+      // Show success message
+      alert('Thank you for your inquiry! Our events team will contact you within 24 hours.');
+      
+      // Reset form
+      inquiryForm.reset();
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Initialize header state
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    }
+  </script>
+</body>
+</html>

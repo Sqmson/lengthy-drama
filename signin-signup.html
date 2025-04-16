@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Hotel | Sign In / Sign Up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #c19a6b;
+      --primary-dark: #8a6d3b;
+      --dark-color: #222;
+      --light-color: #f9f9f9;
+      --gray-color: #777;
+      --light-gray: #eaeaea;
+      --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-color);
+      line-height: 1.6;
+      background-color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Header */
+    header {
+      background-color: var(--dark-color);
+      padding: 20px 0;
+      box-shadow: var(--shadow);
+    }
+    
+    .header-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo i {
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .logo span {
+      color: var(--primary-color);
+    }
+    
+    /* Auth Container */
+    .auth-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+    }
+    
+    .auth-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+      width: 100%;
+      max-width: 500px;
+      transition: var(--transition);
+    }
+    
+    /* Form Toggle */
+    .form-toggle {
+      display: flex;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .form-toggle button {
+      flex: 1;
+      padding: 18px;
+      border: none;
+      background: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .form-toggle button.active {
+      color: var(--primary-color);
+    }
+    
+    .form-toggle button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+    
+    /* Auth Forms */
+    .auth-form {
+      padding: 40px;
+      display: none;
+    }
+    
+    .auth-form.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .auth-form h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--dark-color);
+    }
+    
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+    
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-color);
+    }
+    
+    .auth-form input {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 1px solid var(--light-gray);
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .auth-form input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(193, 154, 107, 0.2);
+    }
+    
+    .auth-form button {
+      width: 100%;
+      padding: 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 10px;
+    }
+    
+    .auth-form button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--gray-color);
+      font-size: 0.9rem;
+    }
+    
+    .form-footer a {
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+    
+    /* Social Login */
+    .social-login {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .social-login p {
+      color: var(--gray-color);
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .social-login p::before,
+    .social-login p::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 30%;
+      height: 1px;
+      background-color: var(--light-gray);
+    }
+    
+    .social-login p::before {
+      left: 0;
+    }
+    
+    .social-login p::after {
+      right: 0;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+    
+    .social-icon.facebook {
+      background-color: #3b5998;
+    }
+    
+    .social-icon.google {
+      background-color: #db4437;
+    }
+    
+    .social-icon.apple {
+      background-color: #000;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    /* Popup Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .popup-content {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .popup-content i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .popup-content h3 {
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    
+    .popup-content p {
+      color: var(--gray-color);
+      margin-bottom: 20px;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    
+    footer p {
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .auth-form {
+        padding: 30px;
+      }
+      
+      .auth-form h2 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .auth-form {
+        padding: 25px;
+      }
+      
+      .form-toggle button {
+        padding: 15px;
+        font-size: 0.9rem;
+      }
+      
+      .auth-form input {
+        padding: 12px 12px 12px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-hotel"></i>Dream <span>Hotel</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Auth Container -->
+  <section class="auth-container">
+    <div class="auth-card">
+      <div class="form-toggle">
+        <button id="showSignIn" class="active">Sign In</button>
+        <button id="showSignUp">Sign Up</button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="signInForm" class="auth-form active">
+        <h2>Welcome Back</h2>
+        
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="Email Address" required>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" required>
+        </div>
+        
+        <button type="submit">Sign In</button>
+        
+        <div class="form-footer">
+          <a href="#">Forgot your password?</a>
+        </div>
+        
+        <div class="social-login">
+          <p>Or sign in with</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon google">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-icon apple">
+              <i class="fab fa-apple"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signUpForm" class="auth-form">
+        <h2>Create Account</h2>
+        
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Full Name" required>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="Email Address" required>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" required>
+        </div>
+        
+        <button type="submit">Sign Up</button>
+        
+        <div class="form-footer">
+          Already have an account? <a href="#" id="switchToSignIn">Sign In</a>
+        </div>
+        
+        <div class="social-login">
+          <p>Or sign up with</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon google">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-icon apple">
+              <i class="fab fa-apple"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <i class="fas fa-check-circle"></i>
+      <h3>Success!</h3>
+      <p id="popupMessage">You have successfully signed in!</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Dream Hotel. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Form Toggle
+    const signInBtn = document.getElementById('showSignIn');
+    const signUpBtn = document.getElementById('showSignUp');
+    const switchToSignIn = document.getElementById('switchToSignIn');
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupMessage = document.getElementById('popupMessage');
+
+    // Toggle between forms
+    function showSignInForm() {
+      signInBtn.classList.add('active');
+      signUpBtn.classList.remove('active');
+      signInForm.classList.add('active');
+      signUpForm.classList.remove('active');
+    }
+
+    function showSignUpForm() {
+      signUpBtn.classList.add('active');
+      signInBtn.classList.remove('active');
+      signUpForm.classList.add('active');
+      signInForm.classList.remove('active');
+    }
+
+    signInBtn.onclick = (e) => {
+      e.preventDefault();
+      showSignInForm();
+    };
+
+    signUpBtn.onclick = (e) => {
+      e.preventDefault();
+      showSignUpForm();
+    };
+
+    switchToSignIn.onclick = (e) => {
+      e.preventDefault();
+      showSignInForm();
+    };
+
+    // Form submission handlers
+    signInForm.onsubmit = (e) => {
+      e.preventDefault();
+      const email = signInForm.querySelector('input[type="email"]').value;
+      // Extract username from email (everything before @)
+      const username = email.split('@')[0];
+      localStorage.setItem('currentUser', username);
+      popupMessage.textContent = `Welcome back, ${username}!`;
+      showPopupAndRedirect();
+    };
+
+    signUpForm.onsubmit = (e) => {
+      e.preventDefault();
+      const fullName = signUpForm.querySelector('input[type="text"]').value;
+      localStorage.setItem('currentUser', fullName);
+      popupMessage.textContent = `Account created successfully! Welcome to Dream Hotel, ${fullName}!`;
+      showPopupAndRedirect();
+    };
+
+    function showPopupAndRedirect() {
+      popupOverlay.classList.add('active');
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 3000);
+    }
+
+    // Initialize with sign in form
+    showSignInForm();
+  </script>
+</body>
+</html>

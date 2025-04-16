@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Hotel | Gourmet Dining</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #c19a6b;
+      --primary-dark: #8a6d3b;
+      --dark-color: #222;
+      --light-color: #f9f9f9;
+      --gray-color: #777;
+      --light-gray: #eaeaea;
+      --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--dark-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: #fff;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    ul {
+      list-style: none;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary-color);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title p {
+      color: var(--gray-color);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      z-index: 1000;
+      transition: var(--transition);
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    header.scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow);
+      padding: 15px 0;
+    }
+    
+    header.scrolled .logo {
+      color: var(--dark-color);
+    }
+    
+    header.scrolled .logo span {
+      color: var(--primary-color);
+    }
+    
+    header.scrolled nav ul li a {
+      color: var(--dark-color);
+    }
+    
+    header.scrolled .mobile-menu-btn i {
+      color: var(--dark-color);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo i {
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .logo span {
+      color: var(--primary-color);
+    }
+    
+    nav ul {
+      display: flex;
+      align-items: center;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+      position: relative;
+    }
+    
+    nav ul li a {
+      font-weight: 500;
+      transition: var(--transition);
+      color: white;
+    }
+    
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+    
+    nav ul li a.active {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
+    
+    /* Page Hero */
+    .page-hero {
+      height: 70vh;
+      min-height: 600px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      margin-top: 80px;
+    }
+    
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to top, #fff, transparent);
+      z-index: 1;
+    }
+    
+    .page-hero-content {
+      width: 100%;
+      padding: 0 20px;
+      z-index: 2;
+    }
+    
+    .page-hero h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .page-hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease 0.3s both;
+    }
+    
+    /* Restaurants Section */
+    .restaurants {
+      padding: 100px 0;
+      background-color: #fff;
+    }
+    
+    .restaurants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+    
+    .restaurant-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .restaurant-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .restaurant-img {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .restaurant-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .restaurant-card:hover .restaurant-img img {
+      transform: scale(1.05);
+    }
+    
+    .restaurant-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .restaurant-content {
+      padding: 25px;
+    }
+    
+    .restaurant-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: var(--dark-color);
+    }
+    
+    .restaurant-cuisine {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .restaurant-hours {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: var(--gray-color);
+    }
+    
+    .restaurant-hours i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    .restaurant-description {
+      color: var(--gray-color);
+      margin-bottom: 20px;
+    }
+    
+    .restaurant-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    
+    .feature-tag {
+      background-color: var(--light-gray);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--dark-color);
+    }
+    
+    /* Chef Section */
+    .chef-section {
+      padding: 100px 0;
+      background-color: var(--light-gray);
+    }
+    
+    .chef-container {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    
+    .chef-img {
+      flex: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .chef-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .chef-content {
+      flex: 1;
+    }
+    
+    .chef-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .chef-title {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .chef-bio {
+      color: var(--gray-color);
+      margin-bottom: 30px;
+    }
+    
+    .signature {
+      margin-top: 30px;
+      font-style: italic;
+      color: var(--dark-color);
+    }
+    
+    /* Menu Highlights Section */
+    .menu-highlights {
+      padding: 100px 0;
+      background-color: #fff;
+    }
+    
+    .menu-categories {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .menu-category {
+      padding: 10px 25px;
+      border-radius: 30px;
+      background-color: var(--light-gray);
+      color: var(--dark-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .menu-category.active, .menu-category:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .menu-item {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+    
+    .menu-item:hover {
+      background-color: var(--light-gray);
+      transform: translateY(-5px);
+    }
+    
+    .menu-item-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .menu-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .menu-item-content {
+      flex: 1;
+    }
+    
+    .menu-item-title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .menu-item-name {
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    .menu-item-price {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .menu-item-description {
+      color: var(--gray-color);
+      font-size: 0.9rem;
+    }
+    
+    /* Dining Experience Section */
+    .dining-experience {
+      padding: 100px 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+    }
+    
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .experience-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      padding: 40px 30px;
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+    
+    .experience-card:hover {
+      transform: translateY(-10px);
+      background-color: rgba(193, 154, 107, 0.3);
+    }
+    
+    .experience-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .experience-card h3 {
+      margin-bottom: 15px;
+    }
+    
+    .experience-card p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Reservations Section */
+    .reservations {
+      padding: 100px 0;
+      background-color: #fff;
+    }
+    
+    .reservation-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+    
+    .reservation-form .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .reservation-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+    
+    .reservation-form input,
+    .reservation-form select,
+    .reservation-form textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .reservation-form input:focus,
+    .reservation-form select:focus,
+    .reservation-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(193, 154, 107, 0.2);
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .form-row .form-group {
+      flex: 1;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 80px 0 0;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+      bottom: 0;
+      left: 0;
+    }
+    
+    .footer-column p {
+      margin-bottom: 20px;
+      color: #aaa;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+    
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links ul li a {
+      color: #aaa;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    
+    .footer-links ul li a:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+    
+    .contact-info li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      color: #aaa;
+    }
+    
+    .contact-info i {
+      margin-right: 15px;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-top: 3px;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    .footer-bottom a {
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+    
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .page-hero h1 {
+        font-size: 3rem;
+      }
+      
+      .chef-container {
+        flex-direction: column;
+      }
+      
+      .chef-img {
+        width: 100%;
+        max-width: 500px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        z-index: 999;
+      }
+      
+      nav ul.active {
+        left: 0;
+      }
+      
+      nav ul li {
+        margin: 15px 0;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .page-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .reservation-container {
+        padding: 30px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .page-hero {
+        height: 60vh;
+        min-height: 500px;
+      }
+      
+      .page-hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .page-hero p {
+        font-size: 1rem;
+      }
+      
+      .btn {
+        padding: 10px 25px;
+      }
+      
+      .menu-item {
+        flex-direction: column;
+      }
+      
+      .menu-item-img {
+        width: 100%;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-hotel"></i>Dream <span>Hotel</span>
+      </a>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="accommodation.html">Accommodations</a></li>
+          <li><a href="meetings.html">Meetings</a></li>
+          <li><a href="dining.html" class="active">Dining</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <h1>Culinary Excellence</h1>
+      <p>Experience world-class dining with our award-winning restaurants, where passion for food meets exceptional service in an elegant atmosphere.</p>
+      <a href="#reservations" class="btn btn-primary">Make a Reservation</a>
+    </div>
+  </section>
+
+  <!-- Restaurants Section -->
+  <section class="restaurants">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Restaurants</h2>
+        <p>Discover our diverse culinary venues, each offering a unique atmosphere and menu crafted by our talented chefs.</p>
+      </div>
+      
+      <div class="restaurants-grid">
+        <!-- Restaurant 1 -->
+        <div class="restaurant-card">
+          <div class="restaurant-img">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Horizon Fine Dining">
+            <div class="restaurant-badge">Fine Dining</div>
+          </div>
+          <div class="restaurant-content">
+            <h3>Horizon</h3>
+            <span class="restaurant-cuisine">Contemporary International</span>
+            <div class="restaurant-hours">
+              <i class="fas fa-clock"></i>
+              <span>Dinner: 6pm - 11pm (Closed Sundays)</span>
+            </div>
+            <p class="restaurant-description">Our signature restaurant offering a sophisticated menu with seasonal ingredients and panoramic city views.</p>
+            <div class="restaurant-features">
+              <span class="feature-tag">Wine Pairings</span>
+              <span class="feature-tag">Chef's Table</span>
+              <span class="feature-tag">Outdoor Seating</span>
+            </div>
+            <a href="#reservations" class="btn btn-outline">Reserve a Table</a>
+          </div>
+        </div>
+        
+        <!-- Restaurant 2 -->
+        <div class="restaurant-card">
+          <div class="restaurant-img">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="The Terrace">
+            <div class="restaurant-badge">Casual</div>
+          </div>
+          <div class="restaurant-content">
+            <h3>The Terrace</h3>
+            <span class="restaurant-cuisine">Mediterranean</span>
+            <div class="restaurant-hours">
+              <i class="fas fa-clock"></i>
+              <span>Breakfast: 7am - 11am | Lunch: 12pm - 4pm</span>
+            </div>
+            <p class="restaurant-description">Al fresco dining with fresh, vibrant flavors inspired by the Mediterranean coast.</p>
+            <div class="restaurant-features">
+              <span class="feature-tag">Poolside</span>
+              <span class="feature-tag">Vegetarian Options</span>
+              <span class="feature-tag">Family Friendly</span>
+            </div>
+            <a href="#reservations" class="btn btn-outline">Reserve a Table</a>
+          </div>
+        </div>
+        
+        <!-- Restaurant 3 -->
+        <div class="restaurant-card">
+          <div class="restaurant-img">
+            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Sakura">
+            <div class="restaurant-badge">Fine Dining</div>
+          </div>
+          <div class="restaurant-content">
+            <h3>Sakura</h3>
+            <span class="restaurant-cuisine">Japanese & Sushi</span>
+            <div class="restaurant-hours">
+              <i class="fas fa-clock"></i>
+              <span>Dinner: 5:30pm - 10:30pm (Closed Mondays)</span>
+            </div>
+            <p class="restaurant-description">Authentic Japanese cuisine with the freshest ingredients and masterful presentation.</p>
+            <div class="restaurant-features">
+              <span class="feature-tag">Omakase</span>
+              <span class="feature-tag">Sake Pairings</span>
+              <span class="feature-tag">Teppanyaki</span>
+            </div>
+            <a href="#reservations" class="btn btn-outline">Reserve a Table</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chef Section -->
+  <section class="chef-section">
+    <div class="container">
+      <div class="chef-container">
+        <div class="chef-img">
+          <img src="https://images.unsplash.com/photo-1600566752227-513f65c58f0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Executive Chef">
+        </div>
+        <div class="chef-content">
+          <h2>Meet Our Executive Chef</h2>
+          <span class="chef-title">Michelin-Starred Culinary Artist</span>
+          <p class="chef-bio">Chef Antoine Dubois brings over 20 years of international culinary experience to Dream Hotel. Trained in Paris and having worked in some of the world's most prestigious kitchens, Chef Dubois creates dishes that are both visually stunning and explosively flavorful. His philosophy centers on respecting ingredients and showcasing their natural qualities through innovative techniques.</p>
+          <p>"At Dream Hotel, we don't just serve meals - we create memorable dining experiences that engage all the senses. Every dish tells a story of passion, precision, and the pursuit of perfection."</p>
+          <div class="signature">— Chef Antoine Dubois</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Highlights Section -->
+  <section class="menu-highlights">
+    <div class="container">
+      <div class="section-title">
+        <h2>Menu Highlights</h2>
+        <p>A selection of signature dishes that showcase our culinary philosophy and seasonal ingredients.</p>
+      </div>
+      
+      <div class="menu-categories">
+        <div class="menu-category active">Starters</div>
+        <div class="menu-category">Main Courses</div>
+        <div class="menu-category">Desserts</div>
+        <div class="menu-category">Wine Pairings</div>
+      </div>
+      
+      <div class="menu-items">
+        <!-- Menu Item 1 -->
+        <div class="menu-item">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Scallop Crudo">
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">
+              <span class="menu-item-name">Scallop Crudo</span>
+              <span class="menu-item-price">$24</span>
+            </div>
+            <p class="menu-item-description">Fresh scallops with yuzu kosho, blood orange, and crispy quinoa</p>
+          </div>
+        </div>
+        
+        <!-- Menu Item 2 -->
+        <div class="menu-item">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Wagyu Beef">
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">
+              <span class="menu-item-name">A5 Wagyu Beef</span>
+              <span class="menu-item-price">$98</span>
+            </div>
+            <p class="menu-item-description">Japanese A5 wagyu with truffle potato purée and seasonal mushrooms</p>
+          </div>
+        </div>
+        
+        <!-- Menu Item 3 -->
+        <div class="menu-item">
+          <div class="menu-item-img">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Chocolate Soufflé">
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">
+              <span class="menu-item-name">Chocolate Soufflé</span>
+              <span class="menu-item-price">$18</span>
+            </div>
+            <p class="menu-item-description">Warm chocolate soufflé with vanilla bean ice cream and caramel sauce</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dining Experience Section -->
+  <section class="dining-experience">
+    <div class="container">
+      <div class="section-title">
+        <h2>Unique Dining Experiences</h2>
+        <p>Beyond exceptional food, we offer memorable culinary journeys that will delight all your senses.</p>
+      </div>
+      
+      <div class="experience-grid">
+        <!-- Experience 1 -->
+        <div class="experience-card">
+          <div class="experience-icon">
+            <i class="fas fa-wine-glass-alt"></i>
+          </div>
+          <h3>Wine Pairing Dinners</h3>
+          <p>Monthly curated dinners featuring exceptional wines paired with seasonal dishes by our sommelier.</p>
+        </div>
+        
+        <!-- Experience 2 -->
+        <div class="experience-card">
+          <div class="experience-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3>Chef's Table</h3>
+          <p>An exclusive counter seating experience where you watch the culinary team prepare your personalized tasting menu.</p>
+        </div>
+        
+        <!-- Experience 3 -->
+        <div class="experience-card">
+          <div class="experience-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <h3>Farm to Table</h3>
+          <p>Special menus featuring ingredients sourced from our partner farms, harvested at peak freshness.</p>
+        </div>
+        
+        <!-- Experience 4 -->
+        <div class="experience-card">
+          <div class="experience-icon">
+            <i class="fas fa-birthday-cake"></i>
+          </div>
+          <h3>Private Dining</h3>
+          <p>Elegant private rooms for special occasions, with customized menus and dedicated service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservations Section -->
+  <section class="reservations" id="reservations">
+    <div class="container">
+      <div class="section-title">
+        <h2>Make a Reservation</h2>
+        <p>Book your table at any of our restaurants or inquire about special dining experiences.</p>
+      </div>
+      
+      <div class="reservation-container">
+        <form class="reservation-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-name">Full Name</label>
+              <input type="text" id="res-name" required>
+            </div>
+            <div class="form-group">
+              <label for="res-email">Email</label>
+              <input type="email" id="res-email" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-phone">Phone</label>
+              <input type="tel" id="res-phone" required>
+            </div>
+            <div class="form-group">
+              <label for="res-guests">Number of Guests</label>
+              <select id="res-guests" required>
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="5">5 people</option>
+                <option value="6">6 people</option>
+                <option value="7">7 people</option>
+                <option value="8">8 people</option>
+                <option value="9+">9+ people</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-date">Date</label>
+              <input type="date" id="res-date" required>
+            </div>
+            <div class="form-group">
+              <label for="res-time">Time</label>
+              <input type="time" id="res-time" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="res-restaurant">Restaurant</label>
+            <select id="res-restaurant" required>
+              <option value="">Select a Restaurant</option>
+              <option value="horizon">Horizon (Fine Dining)</option>
+              <option value="terrace">The Terrace (Casual)</option>
+              <option value="sakura">Sakura (Japanese)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res-notes">Special Requests</label>
+            <textarea id="res-notes" rows="4"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Book Table</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Dream Hotel</h3>
+          <p>Luxury accommodations, exceptional dining, and world-class meeting facilities in the heart of the city.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="accommodation.html">Accommodations</a></li>
+              <li><a href="meetings.html">Meetings</a></li>
+              <li><a href="dining.html">Dining</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Dining</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#">Menus</a></li>
+              <li><a href="#">Private Dining</a></li>
+              <li><a href="#">Wine Cellar</a></li>
+              <li><a href="#">Special Events</a></li>
+              <li><a href="#">Gift Cards</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>123 Luxury Avenue, Downtown, City 10001</span>
+            </li>
+            <li>
+              <i class="fas fa-phone-alt"></i>
+              <span>+1 (555) 123-4567</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>dining@dreamhotel.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Dream Hotel. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
+    // Menu Category Tabs
+    const menuCategories = document.querySelectorAll('.menu-category');
+    menuCategories.forEach(category => {
+      category.addEventListener('click', function() {
+        menuCategories.forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        // In a real implementation, this would filter menu items
+      });
+    });
+    
+    // Form Submission
+    const reservationForm = document.querySelector('.reservation-form');
+    reservationForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const formData = {
+        name: document.getElementById('res-name').value,
+        email: document.getElementById('res-email').value,
+        phone: document.getElementById('res-phone').value,
+        guests: document.getElementById('res-guests').value,
+        date: document.getElementById('res-date').value,
+        time: document.getElementById('res-time').value,
+        restaurant: document.getElementById('res-restaurant').value,
+        notes: document.getElementById('res-notes').value
+      };
+      
+      // Here you would typically send the data to your server
+      console.log('Reservation submitted:', formData);
+      
+      // Show success message
+      alert('Thank you for your reservation request! We will confirm your booking shortly.');
+      
+      // Reset form
+      reservationForm.reset();
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Header scroll effect
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Initialize header state
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    }
+    
+    // Set minimum date for reservations (today)
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('res-date').min = today;
+  </script>
+</body>
+</html>

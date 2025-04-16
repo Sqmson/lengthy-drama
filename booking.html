@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Hotel - Book Your Stay</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #8b5a2b;
+      --secondary-color: #f5e6d0;
+      --accent-color: #d4a76a;
+      --dark-color: #333;
+      --light-color: #fff;
+      --gray-color: #f8f8f8;
+      --border-radius: 8px;
+      --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: var(--gray-color);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--light-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 10px;
+      font-size: 28px;
+    }
+
+    .logo span {
+      color: var(--dark-color);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--dark-color);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .booking-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--light-color);
+      margin-top: 80px;
+    }
+
+    .booking-hero-content {
+      width: 100%;
+    }
+
+    .booking-hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .booking-hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    /* Booking Form Section */
+    .booking-section {
+      padding: 80px 0;
+    }
+
+    .booking-container {
+      display: flex;
+      gap: 40px;
+      margin-top: -100px;
+    }
+
+    .booking-form-container {
+      flex: 1;
+      background-color: var(--light-color);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .booking-summary {
+      flex: 1;
+      background-color: var(--secondary-color);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .section-title p {
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(139, 90, 43, 0.2);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: var(--primary-color);
+      color: var(--light-color);
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #7a4c24;
+      transform: translateY(-2px);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    /* Room Summary */
+    .room-summary {
+      display: flex;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .room-summary-img {
+      width: 120px;
+      height: 120px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    .room-summary-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .room-summary-details h3 {
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .room-summary-features {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .room-summary-features span {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .room-summary-features i {
+      margin-right: 5px;
+      color: var(--primary-color);
+    }
+
+    .price-details {
+      margin-top: 30px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .price-row.total {
+      font-weight: 700;
+      font-size: 18px;
+      border-bottom: none;
+      margin-top: 20px;
+      color: var(--primary-color);
+    }
+
+    /* Success Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background-color: var(--light-color);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(-20px);
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-content i {
+      font-size: 60px;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .modal-content p {
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: var(--light-color);
+      padding: 60px 0 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-column h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: var(--accent-color);
+    }
+
+    .footer-column p {
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--light-color);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+      padding-left: 5px;
+    }
+
+    .contact-info li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-info i {
+      margin-right: 15px;
+      color: var(--accent-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .footer-bottom a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .booking-container {
+        flex-direction: column;
+      }
+      
+      .booking-hero h1 {
+        font-size: 36px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .booking-hero {
+        height: 300px;
+        margin-top: 70px;
+      }
+      
+      .booking-hero h1 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .booking-form-container,
+      .booking-summary {
+        padding: 30px 20px;
+      }
+      
+      .booking-hero h1 {
+        font-size: 28px;
+      }
+      
+      .section-title h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="mainHeader">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-hotel"></i>Dream <span>Hotel</span>
+      </a>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="#" id="aboutLink">About Us</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#testimonials">Testimonials</a></li>
+          <li id="userGreeting"></li>
+        </ul>
+      </nav>
+      <div class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Booking Hero -->
+  <section class="booking-hero">
+    <div class="container booking-hero-content">
+      <h1>Book Your Stay</h1>
+      <p>Complete your reservation to secure your luxury accommodation at Dream Hotel</p>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section class="booking-section">
+    <div class="container booking-container">
+      <!-- Booking Form -->
+      <div class="booking-form-container">
+        <h2>Guest Information</h2>
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-control" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="specialRequests">Special Requests</label>
+            <textarea id="specialRequests" class="form-control" rows="4"></textarea>
+          </div>
+          
+          <h2 style="margin: 30px 0 20px;">Payment Information</h2>
+          
+          <div class="form-group">
+            <label for="cardName">Name on Card</label>
+            <input type="text" id="cardName" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expiryDate">Expiry Date</label>
+              <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" class="form-control" placeholder="123" required>
+            </div>
+          </div>
+          
+          <div class="form-group" style="margin-top: 30px;">
+            <button type="submit" class="btn btn-block">Confirm Booking</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Booking Summary -->
+      <div class="booking-summary">
+        <h2>Your Booking Summary</h2>
+        
+        <div class="room-summary">
+          <div class="room-summary-img">
+            <img src="https://images.unsplash.com/photo-1566669437685-b77fe5c15539?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Executive Suite">
+          </div>
+          <div class="room-summary-details">
+            <h3>Executive Suite</h3>
+            <div class="room-summary-features">
+              <span><i class="fas fa-user-friends"></i> 2 Guests</span>
+              <span><i class="fas fa-expand"></i> 60 m²</span>
+              <span><i class="fas fa-bed"></i> King Bed</span>
+            </div>
+            <p>Luxurious suite with separate living area and panoramic city views.</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="checkIn">Check-in Date</label>
+          <input type="date" id="checkIn" class="form-control" value="2025-06-15">
+        </div>
+        
+        <div class="form-group">
+          <label for="checkOut">Check-out Date</label>
+          <input type="date" id="checkOut" class="form-control" value="2025-06-20">
+        </div>
+        
+        <div class="form-group">
+          <label for="guests">Guests</label>
+          <select id="guests" class="form-control">
+            <option value="1">1 Guest</option>
+            <option value="2" selected>2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+          </select>
+        </div>
+        
+        <div class="price-details">
+          <div class="price-row">
+            <span>$499 x 5 nights</span>
+            <span>$2,495.00</span>
+          </div>
+          <div class="price-row">
+            <span>Taxes & Fees</span>
+            <span>$299.40</span>
+          </div>
+          <div class="price-row total">
+            <span>Total</span>
+            <span>$2,794.40</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Dream Hotel</h3>
+          <p>Where luxury meets comfort in the heart of the city. Experience unparalleled hospitality with our premium services.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="accommodation.html">Accommodations</a></li>
+              <li><a href="meetings&conferences.html">Meetings</a></li>
+              <li><a href="dining.html">Dining</a></li>
+              <li><a href="#" id="footerAboutLink">About Us</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>123 Luxury Avenue, Downtown, City 10001</span>
+            </li>
+            <li>
+              <i class="fas fa-phone-alt"></i>
+              <span>+1 (555) 123-4567</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info@dreamhotel.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Dream Hotel. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+      <i class="fas fa-check-circle"></i>
+      <h2>Reservation Confirmed!</h2>
+      <p>Your booking at Dream Hotel has been successfully completed. A confirmation email has been sent to your address.</p>
+      <p>We look forward to welcoming you!</p>
+    </div>
+  </div>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // Check for logged in user
+    function updateUserGreeting() {
+      const userGreeting = document.getElementById('userGreeting');
+      const currentUser = localStorage.getItem('currentUser');
+      
+      if (currentUser) {
+        userGreeting.innerHTML = `
+          <span class="welcome-message">Welcome, ${currentUser}!</span>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        `;
+      } else {
+        userGreeting.innerHTML = `
+          <a href="signin-signup.html"><button class="Signin-btn">Sign In</button></a>
+          <a href="signin-signup.html"><button class="Signup-btn">Sign Up</button></a>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('currentUser');
+      updateUserGreeting();
+    }
+
+    // Run on page load
+    updateUserGreeting();
+
+    // Booking Form Submission
+    const bookingForm = document.getElementById('bookingForm');
+    const successModal = document.getElementById('successModal');
+
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Show success modal
+      successModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Redirect after 4 seconds
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 4000);
+    });
+
+    // Header scroll effect
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Initialize header state
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    }
+
+    // Set default dates for check-in (tomorrow) and check-out (3 days from now)
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    const checkOutDate = new Date(tomorrow);
+    checkOutDate.setDate(checkOutDate.getDate() + 5);
+    
+    document.getElementById('checkIn').valueAsDate = tomorrow;
+    document.getElementById('checkOut').valueAsDate = checkOutDate;
+
+    // Calculate nights and total price when dates change
+    function calculateTotal() {
+      const checkIn = new Date(document.getElementById('checkIn').value);
+      const checkOut = new Date(document.getElementById('checkOut').value);
+      
+      // Calculate nights
+      const timeDiff = checkOut - checkIn;
+      const nights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+      
+      // Update price
+      if (nights > 0) {
+        const basePrice = 499 * nights;
+        const taxes = basePrice * 0.12;
+        const total = basePrice + taxes;
+        
+        document.querySelector('.price-row:nth-child(1) span:first-child').textContent = `$${499} x ${nights} nights`;
+        document.querySelector('.price-row:nth-child(1) span:last-child').textContent = `$${basePrice.toFixed(2)}`;
+        document.querySelector('.price-row:nth-child(2) span:last-child').textContent = `$${taxes.toFixed(2)}`;
+        document.querySelector('.price-row.total span:last-child').textContent = `$${total.toFixed(2)}`;
+      }
+    }
+
+    document.getElementById('checkIn').addEventListener('change', calculateTotal);
+    document.getElementById('checkOut').addEventListener('change', calculateTotal);
+
+    // Initialize calculation
+    calculateTotal();
+  </script>
+</body>
+</html>

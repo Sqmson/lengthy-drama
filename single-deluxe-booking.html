@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Single Deluxe Room - Booking</title>
+  <link rel="stylesheet" href="room-booking.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;500;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="logo">Dream Hotel</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#">Dining</a>
+      <a href="#">Meetings</a>
+      <a href="accommodation.html">Accommodation</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Single Deluxe Room</h1>
+  </section>
+
+  <section class="container">
+    <!-- Room Description with Image -->
+    <div class="room-details">
+      <img src="Image/SDRtwo.jpg" alt="Single Deluxe Room">
+      <h2>About This Room</h2>
+      <p>The Single Deluxe Room is designed for your ultimate comfort, featuring a spacious layout, a king-size bed, and elegant interior decor. Enjoy breathtaking city views through wide windows, modern amenities, and personalized services that ensure a memorable stay.</p>
+
+      <h3>Amenities & Services:</h3>
+      <ul>
+        <li>King-size Bed</li>
+        <li>Complimentary Breakfast</li>
+        <li>24/7 Room Service</li>
+        <li>Work Desk and Chair</li>
+      </ul>
+      <p class="price">Price: <strong>Shs.430,000 / night</strong></p>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="booking-form">
+      <h2>Book Your Stay</h2>
+      <form>
+        <label>Full Name:</label>
+        <input type="text" placeholder="Your Full Name" required>
+
+        <label>Email Address:</label>
+        <input type="email" placeholder="Your Email" required>
+
+        <label>Check-in Date:</label>
+        <input type="date" required>
+
+        <label>Check-out Date:</label>
+        <input type="date" required>
+
+        <label>Number of Guests:</label>
+        <input type="number" min="1" max="2" required>
+
+        <button type="submit">Confirm Booking</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Dream Hotel. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
